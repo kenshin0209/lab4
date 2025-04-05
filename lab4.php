@@ -75,6 +75,12 @@
         $project = $_POST['project'];
         $exam = $_POST['exam'];
 
+        // Validate grades to be between 1 and 100
+        $assignment = ($assignment >= 1 && $assignment <= 100) ? $assignment : 1;
+        $quizzes = ($quizzes >= 1 && $quizzes <= 100) ? $quizzes : 1;
+        $project = ($project >= 1 && $project <= 100) ? $project : 1;
+        $exam = ($exam >= 1 && $exam <= 100) ? $exam : 1;
+
         // Calculate average
         $average = ($assignment + $quizzes + $project + $exam) / 4;
         
