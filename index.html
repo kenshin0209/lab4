@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #6a11cb, #2575fc);
+            color: black;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: black;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>GRADE CALCULATOR</h2>
+        <form id="gradeForm">
+            <label>Full Name:</label><br>
+            <input type="text" id="name" required><br>
+            <label>Program:</label><br>
+            <input type="text" id="program" required><br>
+            <label>Section:</label><br>
+            <input type="text" id="section" required><br>
+            <label>Assignment (0-100):</label><br>
+            <input type="number" id="assignment" min="0" max="100" required><br>
+            <label>Quizzes (0-100):</label><br>
+            <input type="number" id="quizzes" min="0" max="100" required><br>
+            <label>Project (0-100):</label><br>
+            <input type="number" id="project" min="0" max="100" required><br>
+            <label>Examination (0-100):</label><br>
+            <input type="number" id="exam" min="0" max="100" required><br><br>
+            <button type="button" onclick="calculateGrade()">Calculate</button>
+        </form>
+    </div>
+
+    <div id="result" class="result" style="display: none;">
+        <h3>Result</h3>
+        <p><strong>Name:</strong> <span id="resultName"></span></p>
+        <p><strong>Program:</strong> <span id="resultProgram"></span></p>
+        <p><strong>Section:</strong> <span id="resultSection"></span></p>
+        <p><strong>Average:</strong> <span id="resultAverage"></span></p>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            // Get the form values
+            var name = document.getElementById('name').value;
+            var program = document.getElementById('program').value;
+            var section = document.getElementById('section').value;
+            var assignment = parseFloat(document.getElementById('assignment').value);
+            var quizzes = parseFloat(document.getElementById('quizzes').value);
+            var project = parseFloat(document.getElementById('project').value);
+            var exam = parseFloat(document.getElementById('exam').value);
+
+            // Ensure that grades are between 0 and 100
+            assignment = (assignment >= 0 && assignment <= 100) ? assignment : 0;
+            quizzes = (quizzes >= 0 && quizzes <= 100) ? quizzes : 0;
+            project = (project >= 0 && project <= 100) ? project : 0;
+            exam = (exam >= 0 && exam <= 100) ? exam : 0;
+
+            // Calculate average
+            var average = (assignment + quizzes + project + exam) / 4;
+
+            // Display result
+            document.getElementById('resultName').textContent = name;
+            document.getElementById('resultProgram').textContent = program;
+            document.getElementById('resultSection').textContent = section;
+            document.getElementById('resultAverage').textContent = average.toFixed(2);
+
+            // Show the result div
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
